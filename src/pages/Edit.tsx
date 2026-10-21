@@ -19,14 +19,14 @@ const Edit = () => {
 
     const onSubmit = (input:EditorInput) => {
         if(window.confirm("수정하시겠습니까?")){
-            onUpdate(params.id,input.createdDate.getTime(),input.emotionId,input.title,input.content);
+            onUpdate(Number(params.id),input.createdDate.getTime(),input.emotionId,input.title,input.content);
             nav('/',{replace:true})
         }
     }
 
     const onClickDelete = () => {
         if(window.confirm("삭제하시겠습니까?")){
-            onDelete(params.id);
+            onDelete(Number(params.id));
             nav('/',{replace:true})
         }
     }

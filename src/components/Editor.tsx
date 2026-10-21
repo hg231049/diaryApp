@@ -30,6 +30,7 @@ const Editor = ({onSubmit,initData}:EditorProps) => {
         content:""
     })
 
+    // 수정페이지에서 initData가 있다면 불러오기
     useEffect(()=>{
         if(initData){
             setInput({

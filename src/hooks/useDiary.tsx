@@ -19,7 +19,7 @@ const useDiary = (id:number) => {
         }
 
         setCurDiaryItem(currentDiaryItem);
-    },[id,data]);
+    },[id]);
 
     return curDiaryItem;
 }

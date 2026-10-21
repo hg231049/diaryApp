@@ -9,7 +9,7 @@ import { getStringedDate } from "../util/getStringedDate";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const Diary = () => {
-    const {onUpdate,onDelete} = useContext(DiaryDispatchContext);
+    const {onDelete} = useContext(DiaryDispatchContext);
     const params = useParams();
     const nav = useNavigate();
     const curDiaryItem = useDiary(Number(params.id));
@@ -24,7 +24,7 @@ const Diary = () => {
 
     const onClickDelete = () => {
         if(window.confirm("삭제하시겠습니까?")){
-            onDelete(params.id);
+            onDelete(Number(params.id));
             nav('/',{replace:true})
         }
     }
@@ -33,7 +33,7 @@ const Diary = () => {
         return <div>데이터 로딩중...</div>
     }
 
-    const { createdDate,emotionId,title, content } = curDiaryItem;
+    const { createdDate,emotionId,title,content } = curDiaryItem;
     const diaryTitle = getStringedDate(new Date(createdDate));
     
     return (

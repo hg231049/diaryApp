@@ -1,11 +1,11 @@
 import './App.css'
-import { Route, Routes, Link, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Diary from './pages/Diary'
 import Home from './pages/Home'
 import New from './pages/New'
 import Edit from './pages/Edit'
 import NotFound from './pages/NotFound'
-import { useReducer, useRef,createContext, useEffect, use, useState } from 'react'
+import { useReducer, useRef,createContext, useEffect, useState } from 'react'
 import type { DiaryListItem } from './type/diaryListItem'
 
 // const mockData = [
@@ -31,6 +31,12 @@ import type { DiaryListItem } from './type/diaryListItem'
 //     content:"3번 일기내용"
 //   }
 // ]
+
+interface DiaryDispatchType {
+    onCreate: (createdDate: number, emotionId: number, title: string, content: string) => void;
+    onUpdate: (id: number, createdDate: number, emotionId: number, title: string, content: string) => void;
+    onDelete: (id: number) => void;
+}
 
 type DiaryAction = 
   | {type:"INIT"; data:DiaryListItem[]}
@@ -58,7 +64,7 @@ function reducer(state:DiaryListItem[],action:DiaryAction){
 
 // context
 export const DiaryStateContext = createContext<DiaryListItem[] | null>(null);
-export const DiaryDispatchContext = createContext();
+export const DiaryDispatchContext = createContext<DiaryDispatchType | null>(null);
 
 function App() {
   const [isLoading,setIsLoading] = useState(true);
@@ -96,7 +102,7 @@ function App() {
   },[])
   
   // 새로운 일기 추가
-  const onCreate = (createdDate,emotionId,title,content) => {
+  const onCreate = (createdDate:number,emotionId:number,title:string,content:string) => {
     dispatch({
       type:"CREATE",
       data:{
@@ -110,7 +116,7 @@ function App() {
   }
 
   // 기존 일기 수정
-  const onUpdate = (id,createdDate,emotionId,title,content) => {
+  const onUpdate = (id:number,createdDate:number,emotionId:number,title:string,content:string) => {
     dispatch({
       type:"UPDATE",
       data:{
@@ -124,7 +130,7 @@ function App() {
   }
 
   // 기존 일기 삭제
-  const onDelete = (id) => {
+  const onDelete = (id:number) => {
     dispatch({
       type:"DELETE",
       id,

@@ -1,14 +1,8 @@
 export const getStringedDate = (targetDate:Date) => {
     let year = targetDate.getFullYear();
-    let month = targetDate.getMonth() + 1;
-    let date = targetDate.getDate();
+    let month = String(targetDate.getMonth() + 1).padStart(2,"0");
+    let date = String(targetDate.getDate()).padStart(2,"0");
 
-    if(month < 10) {
-        return `0${month}`
-    }
-    if(date < 10) {
-        return `0${date}`
-    }
 
     return `${year}-${month}-${date}`
 }
