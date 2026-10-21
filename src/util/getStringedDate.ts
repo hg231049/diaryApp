@@ -1,4 +1,4 @@
-export const getStringedDate = (targetDate) => {
+export const getStringedDate = (targetDate:Date) => {
     let year = targetDate.getFullYear();
     let month = targetDate.getMonth() + 1;
     let date = targetDate.getDate();

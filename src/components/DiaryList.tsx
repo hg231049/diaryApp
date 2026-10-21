@@ -2,14 +2,19 @@ import { useState } from "react";
 import Button from "./Button";
 import DiaryItem from "./DiaryItem";
 import { useNavigate } from "react-router-dom";
+import type { DiaryListItem } from "../type/diaryListItem";
 
-const DiaryList = ({data}) => {
+interface DiaryListProps {
+    data:DiaryListItem[];
+}
+
+const DiaryList = ({data}:DiaryListProps) => {
 
     const nav = useNavigate();
 
     const [sortType,setSortType] = useState("latest");
 
-    const onChangeSortType = (e) => {
+    const onChangeSortType = (e:React.ChangeEvent<HTMLSelectElement>) => {
         setSortType(e.target.value);
     }
 

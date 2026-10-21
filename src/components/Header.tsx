@@ -1,5 +1,12 @@
+import type { ReactNode } from "react";
 
-const Header = ({title,leftChild,rightChild}) => {
+interface HeaderProps {
+    title:string;
+    leftChild:ReactNode;
+    rightChild?:ReactNode;
+}
+
+const Header = ({title,leftChild,rightChild}:HeaderProps) => {
     return (
         <header className="header flex items-center py-5 border-b border-[rgb(226,226,226)] [&_div]:flex">
             <div className='header-left justify-start w-1/4'>

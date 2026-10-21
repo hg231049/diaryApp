@@ -1,7 +1,8 @@
 import { getEmotionImage } from "../util/get-emotion-image";
 import {emotionList} from '../util/constants'
+import type { DiaryListItem } from "../type/diaryListItem";
 
-const Viewer = ({ emotionId,title, content }) => {
+const Viewer = ({ emotionId,title, content }:DiaryListItem) => {
 
     const emotionItem = emotionList.find((item)=>String(item.emotionId) === String(emotionId));
 
@@ -15,7 +16,7 @@ const Viewer = ({ emotionId,title, content }) => {
                     <h4>{title}</h4>
                     <div className={`emotionImgWrapper emotionImgWrapper_${emotionId} flex flex-col items-center justify-around w-[250px] h-[250px] rounded-[5px]`}>
                         <img src={getEmotionImage(emotionId)} />
-                        <div>{emotionItem.emotionName}</div>
+                        <div>{emotionItem?.emotionName}</div>
                     </div>
                 </section>
                 <section className="contentSection">

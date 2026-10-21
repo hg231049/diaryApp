@@ -1,6 +1,13 @@
 import { getEmotionImage } from '../util/get-emotion-image'
 
-const EmotionItems = ({emotionId,emotionName,isSelected,onClick}) => {
+interface EmotionItemsProps {
+    emotionId:number;
+    emotionName:string;
+    isSelected:boolean;
+    onClick:()=>void;
+}
+
+const EmotionItems = ({emotionId,emotionName,isSelected,onClick}:EmotionItemsProps) => {
     return (
         <>
             <div 

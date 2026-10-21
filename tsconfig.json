@@ -1,0 +1,26 @@
+{
+  "ts-node": {
+    "esm": true,
+  },
+  // include : 컴파일 할 범위 지정
+  "include":["src"],
+  "compilerOptions": {
+    // target : 컴파일해서 만들어진 js 파일의 버전
+    "target": "ESNext",
+    // 모듈옵션
+    "module": "ESNext",
+    // js파일들이 위치했으면 하는 폴더(ts파일과 분리)
+    "outDir": "./dist",
+    // 실제 소스 코드가 들어있는 폴더
+    "rootDir": "./src",
+    // 타입스크립트 컴파일러가 검사할 때 얼마나 엄격하게 할건지
+    "strict": true,
+    // 전역모듈을 개별 모듈로 변환
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+    // 임시로 null값을 할당하도록
+    "strictNullChecks": false,
+    "jsx": "react-jsx",
+  },
+  
+}

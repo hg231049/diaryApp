@@ -12,7 +12,7 @@ const Diary = () => {
     const {onUpdate,onDelete} = useContext(DiaryDispatchContext);
     const params = useParams();
     const nav = useNavigate();
-    const curDiaryItem = useDiary(params.id);
+    const curDiaryItem = useDiary(Number(params.id));
 
     usePageTitle(`${params.id}번 일기`);
 

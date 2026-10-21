@@ -1,13 +1,15 @@
 import { useContext,useEffect,useState } from "react";
 import { DiaryStateContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import type { DiaryListItem } from "../type/diaryListItem";
 
-const useDiary = (id) => {
-    const data =useContext(DiaryStateContext);
-    const [curDiaryItem,setCurDiaryItem] = useState();
+const useDiary = (id:number) => {
+    const data = useContext(DiaryStateContext);
+    const [curDiaryItem,setCurDiaryItem] = useState<DiaryListItem | undefined>(undefined);
     const nav = useNavigate();
 
     // useEffect : params.id 또는 data의 값이 변할때만 실행되도록
+    //  useNavigate함수는 useEffect안에서 호출되어야함. 마운트가 된 이후에 호출
     useEffect(()=>{
         const currentDiaryItem = data.find((i)=>String(i.id) === String(id));
 

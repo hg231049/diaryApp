@@ -6,33 +6,41 @@ import New from './pages/New'
 import Edit from './pages/Edit'
 import NotFound from './pages/NotFound'
 import { useReducer, useRef,createContext, useEffect, use, useState } from 'react'
+import type { DiaryListItem } from './type/diaryListItem'
 
-const mockData = [
-  {
-    id:0,
-    createdDate:new Date("2026-10-15").getTime(),
-    emotionId:1,
-    title:"1번 일기제목",
-    content:"1번 일기내용"
-  },
-  {
-    id:1,
-    createdDate:new Date("2026-10-14").getTime(),
-    emotionId:2,
-    title:"2번 일기제목",
-    content:"2번 일기내용"
-  },
-  {
-    id:2,
-    createdDate:new Date("2026-09-15").getTime(),
-    emotionId:3,
-    title:"3번 일기제목",
-    content:"3번 일기내용"
-  }
-]
+// const mockData = [
+//   {
+//     id:0,
+//     createdDate:new Date("2026-10-15").getTime(),
+//     emotionId:1,
+//     title:"1번 일기제목",
+//     content:"1번 일기내용"
+//   },
+//   {
+//     id:1,
+//     createdDate:new Date("2026-10-14").getTime(),
+//     emotionId:2,
+//     title:"2번 일기제목",
+//     content:"2번 일기내용"
+//   },
+//   {
+//     id:2,
+//     createdDate:new Date("2026-09-15").getTime(),
+//     emotionId:3,
+//     title:"3번 일기제목",
+//     content:"3번 일기내용"
+//   }
+// ]
 
-function reducer(state,action){
-  let nextState;
+type DiaryAction = 
+  | {type:"INIT"; data:DiaryListItem[]}
+  | {type:"CREATE"; data:DiaryListItem}
+  | {type:"UPDATE"; data:DiaryListItem}
+  | {type:"DELETE"; id:number }
+
+
+function reducer(state:DiaryListItem[],action:DiaryAction){
+  let nextState:DiaryListItem[];
 
   switch(action.type){
     case "INIT" : return action.data;
@@ -49,7 +57,7 @@ function reducer(state,action){
 }
 
 // context
-export const DiaryStateContext = createContext();
+export const DiaryStateContext = createContext<DiaryListItem[] | null>(null);
 export const DiaryDispatchContext = createContext();
 
 function App() {

@@ -1,4 +1,10 @@
-const Button = ({text,type,onClick}) => {
+interface ButtonProps {
+    text:string;
+    type?:string;
+    onClick?:()=>void;
+}
+
+const Button = ({text,type,onClick}:ButtonProps) => {
     return (
         <button
             onClick={onClick}

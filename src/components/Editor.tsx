@@ -1,11 +1,25 @@
 import EmotionItems from "./EmotionItems";
 import Button from "./Button";
 import {  useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
-import {emotionList} from '../util/constants'
-import { getStringedDate } from "../util/getStringedDate";
+import React, { useState,useEffect } from "react";
+import { emotionList } from "../util/constants"; 
+import { getStringedDate } from "../util/getStringedDate"; 
+import type { DiaryListItem } from "../type/diaryListItem";
 
-const Editor = ({onSubmit,initData}) => {
+export interface EditorInput {
+    createdDate:Date;
+    title:string;
+    emotionId:number;
+    content:string;
+}
+
+interface EditorProps {
+    // 입력 데이터를 전달받고 반환값은 없는 함수
+    onSubmit:(input:EditorInput)=>void;
+    initData?:DiaryListItem; // 일기 하나
+}
+
+const Editor = ({onSubmit,initData}:EditorProps) => {
   
     const nav = useNavigate();
     
@@ -25,9 +39,9 @@ const Editor = ({onSubmit,initData}) => {
         }
     },[initData])
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         let name = e.target.name;
-        let value = e.target.value;
+        let value: string | Date = e.target.value;
 
         if(name === "createdDate"){
             value = new Date(value);
@@ -36,6 +50,13 @@ const Editor = ({onSubmit,initData}) => {
         setInput({
             ...input,
             [name]:value
+        })
+    }
+
+    const onChangeEmotion = (emotionId:number) => {
+        setInput({
+            ...input,
+            emotionId:emotionId
         })
     }
 
@@ -70,12 +91,7 @@ const Editor = ({onSubmit,initData}) => {
                     <div className="flex justify-around gap-[2%]">
                         {emotionList.map((item)=>
                             <EmotionItems 
-                               onClick={()=>onChangeInput({
-                                   target:{
-                                        name:"emotionId",
-                                        value:item.emotionId
-                                   }
-                               })}
+                               onClick={()=>onChangeEmotion(item.emotionId)}
                                 key={item.emotionId} 
                                 {...item} 
                                 isSelected={item.emotionId === input.emotionId}
